@@ -9,7 +9,7 @@ env:
   EXTRA_CMDS: "LLVM=1 LLVM_IAS=1 KCFLAGS=-Wno-error=strict-prototypes"
   KERNEL_SOURCE: "https://github.com/PixelExperience-Devices/kernel_xiaomi_thyme.git"
   KERNEL_BRANCH: "thirteen"
-  CLANG_SOURCE: "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master/clang-r450784e.tar.gz"
+  CLANG_SOURCE: "https://github.com/metalisticidiot/proton-clang/releases/download/2023.08.03/clang-proton-2023.08.03-x86_64-linux-gnu.tar.zst"
   CLANG_BRANCH: ""
   GCC_GNU: false
   GCC_64_SOURCE: "https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9.git"
