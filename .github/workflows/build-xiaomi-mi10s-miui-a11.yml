@@ -79,6 +79,12 @@ jobs:
         uses: ./.github/workflows/patch-rekernel
       - name: Patch Kernel of Baseband Guard
         uses: ./.github/workflows/patch-baseband-guard
+      - name: Fix fts_521 strict-prototypes
+        shell: bash
+        run: |
+          cd $GITHUB_WORKSPACE/device_kernel
+          sed -i 's/^struct device \*getDev()$/struct device *getDev(void)/' drivers/input/touchscreen/fts_521/fts_lib/ftsIO.c
+          sed -i 's/^struct i2c_client \*getClient()$/struct i2c_client *getClient(void)/' drivers/input/touchscreen/fts_521/fts_lib/ftsIO.c
       - name: Build Process
         uses: ./.github/workflows/build-process
       - name: Pack Process
