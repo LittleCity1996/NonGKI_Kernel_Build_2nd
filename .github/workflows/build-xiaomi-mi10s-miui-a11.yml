@@ -59,7 +59,7 @@ env:
 jobs:
   build-kernel:
     name: Xiaomi Mi 10S (MIUI 12.0.3) (Kernel 4.19)
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     env:
       CCACHE_COMPILERCHECK: "%compiler% -dumpmachine; %compiler% -dumpversion"
       CCACHE_NOHASHDIR: "true"
