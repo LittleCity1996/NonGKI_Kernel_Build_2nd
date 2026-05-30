@@ -79,7 +79,7 @@ jobs:
         uses: ./.github/workflows/patch-rekernel
       - name: Patch Kernel of Baseband Guard
         uses: ./.github/workflows/patch-baseband-guard
-      - name: Fix touchscreen strict-prototypes
+      - name: Fix kernel strict-prototypes and implicit-int
         shell: bash
         run: |
           cd $GITHUB_WORKSPACE/device_kernel
@@ -88,6 +88,9 @@ jobs:
           sed -i 's/^static u8 goodix_panel_color_read()$/static u8 goodix_panel_color_read(void)/' drivers/input/touchscreen/goodix_driver_gt9886/goodix_ts_core.c
           sed -i 's/^static u8 goodix_panel_vendor_read()$/static u8 goodix_panel_vendor_read(void)/' drivers/input/touchscreen/goodix_driver_gt9886/goodix_ts_core.c
           sed -i 's/^static u8 goodix_panel_display_read()$/static u8 goodix_panel_display_read(void)/' drivers/input/touchscreen/goodix_driver_gt9886/goodix_ts_core.c
+          sed -i 's/^struct class \*get_xiaomi_touch_class()$/struct class *get_xiaomi_touch_class(void)/' drivers/input/touchscreen/xiaomi/xiaomi_touch.c
+          sed -i 's/^struct device \*get_xiaomi_touch_dev()$/struct device *get_xiaomi_touch_dev(void)/' drivers/input/touchscreen/xiaomi/xiaomi_touch.c
+          sed -i 's/^static hdl_count = 0;$/static int hdl_count = 0;/' techpack/camera/drivers/cam_req_mgr/cam_req_mgr_util.c
       - name: Build Process
         uses: ./.github/workflows/build-process
       - name: Pack Process
