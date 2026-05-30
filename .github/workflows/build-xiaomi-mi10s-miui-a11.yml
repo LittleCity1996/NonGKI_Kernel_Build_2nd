@@ -91,6 +91,8 @@ jobs:
           sed -i 's/^struct class \*get_xiaomi_touch_class()$/struct class *get_xiaomi_touch_class(void)/' drivers/input/touchscreen/xiaomi/xiaomi_touch.c
           sed -i 's/^struct device \*get_xiaomi_touch_dev()$/struct device *get_xiaomi_touch_dev(void)/' drivers/input/touchscreen/xiaomi/xiaomi_touch.c
           sed -i 's/^static hdl_count = 0;$/static int hdl_count = 0;/' techpack/camera/drivers/cam_req_mgr/cam_req_mgr_util.c
+          sed -i 's/^struct ce_ops \*ce_services_srng()$/struct ce_ops *ce_services_srng(void)/' drivers/staging/qca-wifi-host-cmn/hif/src/ce/ce_service_srng.c
+          sed -i 's/^static int rmnet_perf_notify()$/static int rmnet_perf_notify(void)/' techpack/data/drivers/rmnet/perf/rmnet_perf_opt.c
       - name: Build Process
         uses: ./.github/workflows/build-process
       - name: Pack Process
