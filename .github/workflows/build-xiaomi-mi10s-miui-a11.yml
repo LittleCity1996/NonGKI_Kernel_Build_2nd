@@ -5,7 +5,7 @@ on:
 env:
   DEVICE_NAME: "xiaomi_mi10s"
   DEVICE_CODENAME: "thyme"
-  CUSTOM_CMDS: "CLANG_TRIPLE=aarch64-linux-gnu-"
+  CUSTOM_CMDS: "CLANG_TRIPLE=aarch64-linux-gnu- KCFLAGS=-Wno-error"
   EXTRA_CMDS: ""
   KERNEL_SOURCE: "https://github.com/PixelExperience-Devices/kernel_xiaomi_thyme.git"
   KERNEL_BRANCH: "thirteen"
