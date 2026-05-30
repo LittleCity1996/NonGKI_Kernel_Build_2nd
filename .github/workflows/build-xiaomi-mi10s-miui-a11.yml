@@ -51,7 +51,7 @@ env:
   BASEBAND_GUARD_BOOT: "false"
   GENERATE_DTB: "false"
   GENERATE_CHIP: "qcom"
-  BUILD_DEBUGGER: "false"
+  BUILD_DEBUGGER: "true"
   SKIP_PATCH: "true"
   BUILD_OTHER_CONFIG: "true"
   MERGE_CONFIG_FILES: ""
