@@ -51,9 +51,9 @@ env:
   BASEBAND_GUARD_BOOT: "false"
   GENERATE_DTB: "false"
   GENERATE_CHIP: "qcom"
-  BUILD_DEBUGGER: "true"
+  BUILD_DEBUGGER: "false"
   SKIP_PATCH: "true"
-  BUILD_OTHER_CONFIG: "false"
+   BUILD_OTHER_CONFIG: "false"
   MERGE_CONFIG_FILES: ""
   FREE_MORE_SPACE: "false"
 jobs:
@@ -95,12 +95,10 @@ jobs:
           sed -i 's/^static int rmnet_perf_notify()$/static int rmnet_perf_notify(void)/' techpack/data/drivers/rmnet/perf/rmnet_perf_opt.c
           sed -i 's/^rmnet_perf_free_hash_table()$/rmnet_perf_free_hash_table(void)/' techpack/data/drivers/rmnet/perf/rmnet_perf_opt.c
           sed -i 's/^struct target_if_ctx \*target_if_get_ctx()$/struct target_if_ctx *target_if_get_ctx(void)/' drivers/staging/qca-wifi-host-cmn/target_if/core/src/target_if_main.c
-      - name: Fix python2 for dtbo.img
+      - name: Fix dtbo.img generation
         run: |
-          sudo sh -c 'echo "#!/bin/sh\nexec python3 \"\$@\"" > /usr/bin/python2 && chmod +x /usr/bin/python2'
           cd $GITHUB_WORKSPACE/device_kernel
-          sed -i 's/xrange/range/g; s/ is 0:/ == 0:/; s/dt_entry_buf = ""/dt_entry_buf = b""/' scripts/dtc/mkdtboimg.py
-          sed -i '/^cmd_mkdtboimg/ c\cmd_mkdtboimg = touch $@' arch/arm64/boot/Makefile
+          sed -i '/^cmd_mkdtimg = python2/ c\cmd_mkdtimg = touch $@' scripts/Makefile.lib
       - name: Build Process
         uses: ./.github/workflows/build-process
       - name: Pack Process
