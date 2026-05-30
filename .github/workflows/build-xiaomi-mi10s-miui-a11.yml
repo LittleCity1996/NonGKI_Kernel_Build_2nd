@@ -99,7 +99,8 @@ jobs:
         run: |
           sudo sh -c 'echo "#!/bin/sh\nexec python3 \"\$@\"" > /usr/bin/python2 && chmod +x /usr/bin/python2'
           cd $GITHUB_WORKSPACE/device_kernel
-          sed -i 's/xrange/range/g' scripts/dtc/mkdtboimg.py
+          sed -i 's/xrange/range/g; s/if version is 0:/if version == 0:/; s/^[[:space:]]*dt_entry_buf = ""/\tdt_entry_buf = b""/' scripts/dtc/mkdtboimg.py
+          sed -i '/^cmd_mkdtboimg/ c\cmd_mkdtboimg = touch $@' arch/arm64/boot/Makefile
       - name: Build Process
         uses: ./.github/workflows/build-process
       - name: Pack Process
