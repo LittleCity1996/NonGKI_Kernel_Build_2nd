@@ -6,10 +6,10 @@ env:
   DEVICE_NAME: "xiaomi_mi10s"
   DEVICE_CODENAME: "thyme"
   CUSTOM_CMDS: "CLANG_TRIPLE=aarch64-linux-gnu-"
-  EXTRA_CMDS: "LLVM=1 LLVM_IAS=1 KCFLAGS=-Wno-error CFLAGS=-Wno-error HOSTCFLAGS=-Wno-error"
+  EXTRA_CMDS: "LLVM=1 LLVM_IAS=1"
   KERNEL_SOURCE: "https://github.com/PixelExperience-Devices/kernel_xiaomi_thyme.git"
   KERNEL_BRANCH: "thirteen"
-  CLANG_SOURCE: "https://github.com/llvm/llvm-project/releases/download/llvmorg-19.1.7/LLVM-19.1.7-Linux-X64.tar.xz"
+  CLANG_SOURCE: "https://raw.githubusercontent.com/Neutron-Toolchains/antman/main/antman"
   CLANG_BRANCH: ""
   GCC_GNU: false
   GCC_64_SOURCE: "https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9.git"
