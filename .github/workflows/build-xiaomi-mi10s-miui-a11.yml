@@ -7,8 +7,8 @@ env:
   DEVICE_CODENAME: "thyme"
   CUSTOM_CMDS: "CLANG_TRIPLE=aarch64-linux-gnu- KCFLAGS=-Wno-error"
   EXTRA_CMDS: ""
-  KERNEL_SOURCE: "https://github.com/PixelExperience-Devices/kernel_xiaomi_thyme.git"
-  KERNEL_BRANCH: "thirteen"
+  KERNEL_SOURCE: "https://github.com/diphons/kernel_xiaomi_sm8250.git"
+  KERNEL_BRANCH: "staging8"
   CLANG_SOURCE: "https://raw.githubusercontent.com/Neutron-Toolchains/antman/main/antman"
   CLANG_BRANCH: ""
   GCC_GNU: true
