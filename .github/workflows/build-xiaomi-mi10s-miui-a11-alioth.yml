@@ -9,8 +9,8 @@ env:
   EXTRA_CMDS: ""
   KERNEL_SOURCE: "https://github.com/UtsavBalar1231/kernel_xiaomi_sm8250.git"
   KERNEL_BRANCH: "alioth-r-oss"
-  CLANG_SOURCE: "https://raw.githubusercontent.com/Neutron-Toolchains/antman/main/antman"
-  CLANG_BRANCH: ""
+  CLANG_SOURCE: "https://github.com/kdrag0n/proton-clang.git"
+  CLANG_BRANCH: "master"
   GCC_GNU: true
   GCC_64_SOURCE: "https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9.git"
   GCC_64_BRANCH: "android12L-release"
@@ -86,6 +86,7 @@ jobs:
           sed -i 's/^static hdl_count = 0;$/static int hdl_count = 0;/' techpack/camera/drivers/cam_req_mgr/cam_req_mgr_util.c
           sed -i 's/^struct target_if_ctx \*target_if_get_ctx()$/struct target_if_ctx *target_if_get_ctx(void)/' drivers/staging/qca-wifi-host-cmn/target_if/core/src/target_if_main.c
           sed -i 's/extern in_long_press;/extern int in_long_press;/' arch/arm64/kernel/smp.c
+          sed -i 's/static char \*hw_item_dump()/static char *hw_item_dump(void)/' arch/arm64/kernel/hwconf_manager.c
       - name: Build Process
         uses: ./.github/workflows/build-process
       - name: Pack Process
