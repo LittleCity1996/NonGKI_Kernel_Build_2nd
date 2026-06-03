@@ -94,6 +94,7 @@ jobs:
           # mkdtboimg.py：python2->python3 兼容
           sed -i 's/cmd_mkdtimg = python2/cmd_mkdtimg = python3/' scripts/Makefile.lib
           sed -i 's/\bxrange\b/range/g' scripts/dtc/mkdtboimg.py
+          sed -i 's/dt_entry_buf = ""/dt_entry_buf = b""/' scripts/dtc/mkdtboimg.py
 
       - name: Build Process
         uses: ./.github/workflows/build-process
