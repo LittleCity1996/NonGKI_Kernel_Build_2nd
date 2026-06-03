@@ -95,6 +95,10 @@ jobs:
           sed -i 's/cmd_mkdtimg = python2/cmd_mkdtimg = python3/' scripts/Makefile.lib
           sed -i 's/\bxrange\b/range/g' scripts/dtc/mkdtboimg.py
           sed -i 's/dt_entry_buf = ""/dt_entry_buf = b""/' scripts/dtc/mkdtboimg.py
+          sed -i "s/array('c', ' ' \* self.__metadata_size)/array('B', b'\\\\x00' * self.__metadata_size)/" scripts/dtc/mkdtboimg.py
+          sed -i 's/if version is 0:/if version == 0:/' scripts/dtc/mkdtboimg.py
+          sed -i 's|self.dt_entries_offset / 4|self.dt_entries_offset // 4|' scripts/dtc/mkdtboimg.py
+          sed -i 's|(self.dt_entries_offset - self._DT_TABLE_HEADER_SIZE) / 4|(self.dt_entries_offset - self._DT_TABLE_HEADER_SIZE) // 4|' scripts/dtc/mkdtboimg.py
 
       - name: Build Process
         uses: ./.github/workflows/build-process
