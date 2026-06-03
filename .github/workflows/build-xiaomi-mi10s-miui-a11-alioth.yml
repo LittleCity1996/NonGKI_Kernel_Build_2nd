@@ -100,6 +100,12 @@ jobs:
           sed -i 's|self.dt_entries_offset / 4|self.dt_entries_offset // 4|' scripts/dtc/mkdtboimg.py
           sed -i 's|(self.dt_entries_offset - self._DT_TABLE_HEADER_SIZE) / 4|(self.dt_entries_offset - self._DT_TABLE_HEADER_SIZE) // 4|' scripts/dtc/mkdtboimg.py
 
+      - name: Disable conflicting touchscreen driver
+        shell: bash
+        run: |
+          cd $GITHUB_WORKSPACE/device_kernel
+          # st/ 和 fts_521/ 都定义了 ftsError.c 的同名函数，禁掉旧的 st/
+          sed -i '/^obj-\$(CONFIG_TOUCHSCREEN_ST)/s/^/#/' drivers/input/touchscreen/Makefile
       - name: Build Process
         uses: ./.github/workflows/build-process
       - name: Pack Process
