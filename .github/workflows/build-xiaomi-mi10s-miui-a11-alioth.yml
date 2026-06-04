@@ -43,8 +43,8 @@ env:
   REKERNEL_ENABLE: "false"
   HOOK_METHOD: "syscall"
   KERNEL_PATCH: "false"
-  KPM_ENABLE: "true"
-  KPM_INLINE: "true"
+  KPM_ENABLE: "false"
+  KPM_INLINE: "false"
   KPM_KPATCH_NEXT: "false"
   KPM_PATCH_SOURCE: "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU_patch/refs/heads/main/kpm/patch_linux"
   BASEBAND_GUARD_ENABLE: "false"
@@ -108,7 +108,24 @@ jobs:
           sed -i '/^obj-\$(CONFIG_TOUCHSCREEN_ST)/s/^/#/' drivers/input/touchscreen/Makefile
       - name: Build Process
         uses: ./.github/workflows/build-process
+      - name: Remove dtbo.img to avoid flashing it
+        shell: bash
+        run: |
+          find $GITHUB_WORKSPACE -name "dtbo.img" -delete 2>/dev/null || true
       - name: Pack Process
         uses: ./.github/workflows/pack-process
+      - name: Verify no dtbo.img in final zip
+        shell: bash
+        run: |
+          for zip in $GITHUB_WORKSPACE/*.zip; do
+            if [ -f "$zip" ]; then
+              if unzip -l "$zip" | grep -q dtbo.img; then
+                echo "❌ ERROR: dtbo.img found in $zip"
+                exit 1
+              else
+                echo "✅ dtbo.img NOT in $zip"
+              fi
+            fi
+          done
       - name: Upload Artifacts
         uses: ./.github/workflows/upload-files
